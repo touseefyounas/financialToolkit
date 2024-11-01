@@ -1,14 +1,15 @@
 const tax = require('@equisoft/tax-ca')
 
-const incomeTax = (income, provnice) => {
+const income = 60000; // Example income
+const province = 'ON'; // Example province, Ontario
 
-    console.log('Federal Tax:', tax.getFederalTaxAmount(provnice,income))
+const federalTax = tax.getFederalBaseTaxAmount(income)
 
-    console.log('Provnicial Tax:', tax.getProvincialTaxAmount(provnice, income))
+const provincialTax = tax.getProvincialBaseTaxAmount(province, income)
 
-    console.log('CPP deduction: ', tax.EI)
 
-    console.log('EI: ', tax.EI)
-}
+console.log(`Federal Tax: `, federalTax);
+console.log('Provincial Tax: ', provincialTax);
 
-incomeTax(65000,'ON');
+console.log(tax);
+
