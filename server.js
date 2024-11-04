@@ -1,44 +1,46 @@
-require('dotenv').config()
+require("dotenv").config();
 
-const express = require('express')
-const session = require('express-session')
+const express = require("express");
+const session = require("express-session");
+const mongoose = require("mongoose");
+// const User = require("./model/User");
+const userController = require("./src/controllers/user-controller");
 
-const store = new session.MemoryStore()
+mongoose.connect(process.env.DATABASE_URL);
+const db = mongoose.connection;
+db.on("error", (error) => console.error(error));
+db.once("open", () => console.log("Connected to database"));
 
-const app = express()
+const store = new session.MemoryStore();
+
+const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-app.use(session({
-    secret: 'secret_key',
+app.use(
+  session({
+    secret: "secret_key",
     resave: false,
     saveUninitialized: false,
     store,
     cookie: {
-        maxAge: 300000000
-    }
-}))
+      maxAge: 300000000,
+    },
+  })
+);
 
-app.get('/', (req, res) => {
-    res.send('Financial Kit Backend Running');
-})
+app.get("/", (req, res) => {
+  res.send("Financial Kit Backend Running");
+});
 
-app.use(express.json())
+app.use(express.json());
 
-app.post('/login', (req, res, next)=> {
-    userController.loginUser(req, res, next);
-})
+app.post("/login", userController.loginUser);
 
+app.post("/register", userController.registerUser);
 
-app.post('/logout', (req, res)=> {
-    req.session.destroy((err) => {
-        if (err){
-            return res.status(500).send('Failed to log out')
-        }
-        res.send('Logged Out Successfully')
-    })
-})
+app.post("/logout", userController.logoutUser);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`)
-})
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
