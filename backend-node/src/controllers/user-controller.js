@@ -16,7 +16,7 @@ const loginUser = async (req, res) => {
     const user = await userService.loginUser(email, password);
 
     req.session.userId = user._id;
-    res.status(200).json({ message: "Login successful" });
+    res.status(200).json({ message: "Login successful", user});
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -31,4 +31,12 @@ const logoutUser = (req, res) => {
   });
 };
 
-module.exports = { registerUser, loginUser, logoutUser };
+const auth = (req, res, next) => {
+  if (req.session.userId) {
+    next();
+  } else {
+    res.status(401).json({message: "Unauthorized: Please login."})
+  }
+}
+
+module.exports = { registerUser, loginUser, logoutUser, auth };
