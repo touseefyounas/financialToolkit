@@ -11,7 +11,7 @@ function App() {
           <Outlet/>
         </div>
       </div>
-      <div className="App">Welcome to Financial Tool kit!</div>
+  
     </>
   );
 }
