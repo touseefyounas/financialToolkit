@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } 
 import App from './App'
 import Register from './Register';
 import Login from './Login';
+import IncomeTax from './IncomeTax';
 
 const Router = () => {
 
@@ -10,6 +11,7 @@ const Router = () => {
             <Route path='/' element={<App />}>
                 <Route path='register' element={<Register/>}/>
                 <Route path='login' element={<Login/>}/>
+                <Route path='income-tax' element={<IncomeTax/>}/>
             </Route>
         </>
     ))

@@ -6,7 +6,9 @@ const NavBar = () => {
         <>
         <div className='w-5/6 mx-auto h-20 bg-secondary m-2 rounded-full'>
             <div className="flex h-20 items-center justify-between">
+                <Link to='/'>
                 <h1 className="text-xl text-text mx-8">Financial ToolKit</h1>
+                </Link>
                 <div className="mx-4">
                     <Link to='register'>
                     <button className="text-text bg-accent mr-4 px-4 py-2 rounded-full min-w-[100px] hover:font-bold hover:bg-primary">Register</button>

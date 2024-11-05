@@ -6,7 +6,7 @@ const Register = () => {
             <div className=' w-full m-4'>
                 <div className="w-2/6 mx-auto mt-20 bg-secondary rounded-xl">
                 <form className='rounded-lg text-text  m-4 py-4 px-6 '>
-                    <label><h1 className='pb-2 text-text text-xl font-medium'>Register</h1></label>
+                    <label><h1 className='pb-2 text-text text-xl font-medium'>Register Your Account</h1></label>
                     
                     <div className='flex md:flex-wrap flex-col md:flex-row md:space-x-4'>
                     <div className='mb-5 flex-1'>
@@ -36,7 +36,7 @@ const Register = () => {
 
                     <div className='mb-5'>
                     
-                    <button type='submit' className="text-text bg-accent mr-4 px-4 py-2 rounded-full w-full hover:font-bold hover:bg-primary">Register Now</button>
+                    <button type='submit' className="text-text bg-accent mr-4 px-4 py-2 mt-2 rounded-full w-full hover:font-bold hover:bg-primary">Register Now</button>
               
                     </div>                   
                     </form>
