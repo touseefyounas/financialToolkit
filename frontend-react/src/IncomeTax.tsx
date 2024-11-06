@@ -1,7 +1,53 @@
 import IncomeDisplay from "./IncomeDisplay";
-
+import { useState, useEffect } from "react";
 
 const IncomeTax = () => {
+
+    const [ data, setData ] = useState({
+        income:50000,
+        per: 'annually',
+        province: 'AB'
+    });
+
+    const [taxes, setTaxes] = useState({
+        federalTax: 0,
+        provincialTax:0,
+    })
+
+    useEffect(()=>{
+        console.log(data)
+    }, [data])
+
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+  
+        setData((prevState)=>({
+          ...prevState,
+          [name]: value
+        }))  
+      }
+      
+    const handleSubmit = async (e: any) => {
+        e.preventDefault()
+        console.log(data)
+        try {
+            const response = await fetch('http://localhost:8080/income-tax', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify(data)
+            })
+            if (response.ok){
+                const responseData = await response.json()
+                setTaxes(responseData)
+            }
+        } catch(err){
+            console.error('Error while fetching tax figures: ', err)
+        }
+    }
+
     return (
         <>
         <div className="w-10/12 mx-auto mt-10 rounded-3xl bg-white h-auto text-text shadow-lg">
@@ -13,17 +59,17 @@ const IncomeTax = () => {
                 <h3 className="text-xl font-normal">Find out how much your salary is after tax</h3>
             </div>
             <div className='mb-2 mt-6'>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="flex flex-col xl:flex-row justify-center gap-6">
                     <div className="flex flex-wrap gap-3">
                     <div>
-                        <label className="block text-sm p-1 pl-2">Enter your income</label>
-                        <input type="number" required className="rounded-full h-10 px-3 text-primary font-medium min-w-[265px]" min='0'/>
+                        <label className="block text-sm p-1 pl-2" htmlFor='income'>Enter your income</label>
+                        <input value={data.income} onChange={handleChange} type="number" name='income' required className="rounded-full h-10 px-3 text-primary font-medium min-w-[265px]" min='0'/>
                     </div>
 
                     <div>
-                        <label className="block text-sm p-1 pl-2" htmlFor="">Per</label>
-                        <select required className="rounded-full h-10 px-4 text-primary font-medium min-w-[265px]">
+                        <label className="block text-sm p-1 pl-2" htmlFor="per">Per</label>
+                        <select value={data.per} onChange={handleChange} required name='per' className="rounded-full h-10 px-4 text-primary font-medium min-w-[265px]">
                         <option value="annually">Annually</option>
                         <option value="monthly">Monthly</option>
                         <option value="biweekly">Biweekly</option>
@@ -34,8 +80,8 @@ const IncomeTax = () => {
                     </div>
 
                     <div>
-                        <label className="block text-sm p-1 pl-2">Where do you work?</label>
-                        <select required className="rounded-full h-10 text-primary px-4 font-medium">
+                        <label className="block text-sm p-1 pl-2" htmlFor="province">Where do you work?</label>
+                        <select value={data.province} onChange={handleChange} required name='province' className="rounded-full h-10 text-primary px-4 font-medium">
                         <option value="AB">Alberta</option>
                         <option value="BC">British Columbia</option>
                         <option value="MB">Manitoba</option>
@@ -72,8 +118,8 @@ const IncomeTax = () => {
                         <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary mr-2 mb-2">Hourly</button>
                     </div>
                 </div>
-                <div className="max-w-[640px] w-full px-10 lg:px-20">
-                    <IncomeDisplay/>
+                <div className="max-w-[640px] w-full px-10 lg:px-20 mb-4">
+                    <IncomeDisplay income={data.income} taxes={taxes}/>
                 </div>
             </div>
         </div>
