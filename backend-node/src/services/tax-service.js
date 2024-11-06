@@ -1,38 +1,32 @@
 const tax = require('@equisoft/tax-ca')
 
 class TaxService {
-
-     getFederalTax (income, per)  {
-        switch(per) {
-            case 'annualy':
-                return tax.getFederalTaxAmount(income)
-            case 'monthly':
-                return tax.getFederalTaxAmount(income*12)
-            case 'biweekly':
-                return tax.getFederalTaxAmount(income*24)
-            case 'weekly':
-                return tax.getFederalTaxAmount(income*52)
-            case 'daily':
-                return tax.getFederalTaxAmount(income*260)
-            case 'hourly':
-                return tax.getFederalTaxAmount(income*260*8)
-        }
+    getFederalTax(income, per, province) {
+        const annualIncome = this.convertToAnnual(income, per)
+        return tax.getFederalTaxAmount(province, annualIncome)
     }
 
     getProvincialTax(income, per, province) {
+        const annualIncome = this.convertToAnnual(income, per)
+        return tax.getProvincialTaxAmount(province, annualIncome)
+    }
+
+    convertToAnnual(income, per) {
         switch(per) {
-            case 'annualy':
-                return tax.getFederalTaxAmount(province, income)
+            case 'annually':
+                return income
             case 'monthly':
-                return tax.getFederalTaxAmount(province, income*12)
+                return income * 12
             case 'biweekly':
-                return tax.getFederalTaxAmount(province, income*24)
+                return income * 26
             case 'weekly':
-                return tax.getFederalTaxAmount(province, income*52)
+                return income * 52
             case 'daily':
-                return tax.getFederalTaxAmount(province, income*260)
+                return income * 260 
             case 'hourly':
-                return tax.getFederalTaxAmount(province, income*260*8)
+                return income * 2080
+            default:
+                throw new Error('Invalid period specified')
         }
     }
 }
