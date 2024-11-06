@@ -1,17 +1,19 @@
 import { Outlet } from "react-router-dom";
 import "./App.css";
 import NavBar from "./NavBar/navbar";
+import Footer from "./components/footer/footer";
 
 function App() {
   return (
     <>
       <div className="flex flex-col min-h-screen bg-background">
-        <NavBar/>
+        <NavBar />
         <div className="flex-grow">
-          <Outlet/>
+          <Outlet />
         </div>
+
+        <Footer />
       </div>
-  
     </>
   );
 }
