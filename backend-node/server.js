@@ -3,8 +3,10 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
+
 // const User = require("./model/User");
 const userController = require("./src/controllers/user-controller");
+const taxController = require(".src/controllers/tax-controller");
 
 //mongoose.connect(process.env.DATABASE_URL);
 mongoose.connect(`mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@localhost:27017/store`, {
@@ -47,7 +49,7 @@ app.post("/logout", userController.logoutUser);
 
 app.get('/home', userController.auth);
 
-app.get('/income-tax', )
+app.get('/income-tax', taxController.getTax);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
