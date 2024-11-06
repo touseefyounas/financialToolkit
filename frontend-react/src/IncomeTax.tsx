@@ -1,4 +1,4 @@
-
+import IncomeDisplay from "./IncomeDisplay";
 
 
 const IncomeTax = () => {
@@ -60,15 +60,20 @@ const IncomeTax = () => {
                 </form>
             </div>
             </div>
-            <div className="flex justify-center p-4 w-full gap-2 md:gap-12">
-                <h5 className="text-primary">Salary Rate</h5>
-                <div>
-                    <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary">Annual</button>
-                    <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary">Monthly</button>
-                    <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary">Biweekly</button>
-                    <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary">Weekly</button>
-                    <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary">Daily</button>
-                    <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary">Hourly</button>
+            <div className="flex flex-col w-full justify-center items-center">
+                <div className="flex items-center justify-center p-4 w-full gap-2 md:gap-12">
+                    <h5 className="text-primary font-semibold">Salary Rate</h5>
+                    <div>
+                        <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary mr-2 mb-2">Annual</button>
+                        <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary mr-2 mb-2">Monthly</button>
+                        <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary mr-2 mb-2">Biweekly</button>
+                        <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary mr-2 mb-2">Weekly</button>
+                        <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary mr-2 mb-2">Daily</button>
+                        <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary mr-2 mb-2">Hourly</button>
+                    </div>
+                </div>
+                <div className="max-w-[640px] w-full px-10 lg:px-20">
+                    <IncomeDisplay/>
                 </div>
             </div>
         </div>
