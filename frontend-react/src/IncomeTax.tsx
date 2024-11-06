@@ -4,7 +4,7 @@
 const IncomeTax = () => {
     return (
         <>
-        <div className="w-10/12 mx-auto mt-10 rounded-3xl bg-white h-96 text-text shadow-lg">
+        <div className="w-10/12 mx-auto mt-10 rounded-3xl bg-white h-auto text-text shadow-lg">
             <div className="p-4 bg-secondary w-full rounded-t-3xl">
             <div className="mb-2">
             <h1 className="text-3xl font-semibold">Income tax calculator for Canada</h1>
@@ -14,15 +14,16 @@ const IncomeTax = () => {
             </div>
             <div className='mb-2 mt-6'>
                 <form>
-                    <div className="flex gap-8">
+                    <div className="flex flex-col xl:flex-row justify-center gap-6">
+                    <div className="flex flex-wrap gap-3">
                     <div>
                         <label className="block text-sm p-1 pl-2">Enter your income</label>
-                        <input type="number" required className="rounded-full min-w-[200px] h-10 px-3 text-primary font-medium" min='0'/>
+                        <input type="number" required className="rounded-full h-10 px-3 text-primary font-medium min-w-[265px]" min='0'/>
                     </div>
 
                     <div>
                         <label className="block text-sm p-1 pl-2" htmlFor="">Per</label>
-                        <select required className="rounded-full min-w-[200px] h-10 px-4 text-primary font-medium">
+                        <select required className="rounded-full h-10 px-4 text-primary font-medium min-w-[265px]">
                         <option value="annually">Annually</option>
                         <option value="monthly">Monthly</option>
                         <option value="biweekly">Biweekly</option>
@@ -34,7 +35,7 @@ const IncomeTax = () => {
 
                     <div>
                         <label className="block text-sm p-1 pl-2">Where do you work?</label>
-                        <select required className="rounded-full min-w-[200px] h-10 text-primary px-4 font-medium">
+                        <select required className="rounded-full h-10 text-primary px-4 font-medium">
                         <option value="AB">Alberta</option>
                         <option value="BC">British Columbia</option>
                         <option value="MB">Manitoba</option>
@@ -50,13 +51,25 @@ const IncomeTax = () => {
                         <option value="YT">Yukon</option>
                         </select>
                     </div>
+                    </div>
 
-                    <div className="mt-7">
+                    <div className="flex items-end mt-7">
                     <button type='submit' className="text-text bg-accent px-4 py-2 min-w-[200px] rounded-full h-10 hover:font-bold hover:bg-primary">Calculate</button>
                     </div>
                     </div>
                 </form>
             </div>
+            </div>
+            <div className="flex justify-center p-4 w-full gap-2 md:gap-12">
+                <h5 className="text-primary">Salary Rate</h5>
+                <div>
+                    <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary">Annual</button>
+                    <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary">Monthly</button>
+                    <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary">Biweekly</button>
+                    <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary">Weekly</button>
+                    <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary">Daily</button>
+                    <button className="text-text bg-accent px-4 py-2 min-w-[100px] rounded-full h-10 hover:font-bold hover:bg-primary">Hourly</button>
+                </div>
             </div>
         </div>
         </>

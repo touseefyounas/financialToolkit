@@ -6,7 +6,7 @@ const Login = () => {
         <>
         <div>
             <div className=' w-full m-4'>
-                <div className="w-2/6 mx-auto mt-20 bg-secondary rounded-xl">
+                <div className="w-2/6 mx-auto mt-20 bg-secondary rounded-3xl">
                 <form className='rounded-lg text-text  m-4 py-4 px-6 '>
                     <label><h1 className='pb-2 text-text text-xl font-medium'>Login to Your Account</h1></label>
 
