@@ -11,6 +11,13 @@ class TaxService {
         return tax.getProvincialTaxAmount(province, annualIncome)
     }
 
+    getEI(income, per, province){
+        const rate = province === 'QC'? tax.EI.PREMIUM_RATES.QC : tax.EI.PREMIUM_RATES.CA;
+        const annualIncome = this.convertToAnnual(income, per);
+        const insurableIncome = Math.min(annualIncome, tax.EI.MAX_INSURABLE_EARNINGS);
+        return  insurableIncome * rate;
+    }
+
     convertToAnnual(income, per) {
         switch(per) {
             case 'annually':
