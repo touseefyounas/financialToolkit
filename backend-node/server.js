@@ -47,6 +47,8 @@ app.post("/logout", userController.logoutUser);
 
 app.get('/home', userController.auth);
 
+app.get('/income-tax', )
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
