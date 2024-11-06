@@ -1,28 +1,52 @@
+import { useState } from 'react';
 
 interface IncomeDisplayProps {
     income: number;
     taxes: {
-        federalTax: Number;
-        provincialTax: Number;
+        federalTax: number;
+        provincialTax: number;
+        eIDeduction: number;
     }
+    cadence: string;
   }
 
-const IncomeDisplay: React.FC<IncomeDisplayProps> = ({income, taxes}) => {
+const IncomeDisplay: React.FC<IncomeDisplayProps> = ({income, taxes, cadence}) => {
+
+    const convertValue = (value: number): number => {
+        switch(cadence) {
+            case 'annually':
+                return value
+            case 'monthly':
+                return value / 12
+            case 'biweekly':
+                return value / 26
+            case 'weekly':
+                return value / 52
+            case 'daily':
+                return value / 260 
+            case 'hourly':
+                return value / 2080
+            default:
+                return value
+        }
+    }
+
+
     return (
         <>
         <div className="font-mono text-primary border-b-2">
             <div className="flex justify-between mb-2 font-semibold">
                 <p>Salary</p>
-                <p>${income}</p>
+                <p>${convertValue(income).toFixed(2)}</p>
             </div>
             <div className="flex justify-between mb-2">
                 <p>Federal Tax Deduction</p>
-                <p>-${taxes.federalTax.toFixed(2)}</p>
+                <p>-${convertValue(taxes.federalTax).toFixed(2)}</p>
 
             </div>
             <div className="flex justify-between mb-2">
                 <p>Provincial Tax Deduction</p>
-                <p>-${taxes.provincialTax.toFixed(2)}</p>
+                <p>-${convertValue(taxes.provincialTax).toFixed(2)}</p>
             </div>
             <div className="flex justify-between mb-2">
                 <p>CPP Deduction</p>
@@ -30,17 +54,17 @@ const IncomeDisplay: React.FC<IncomeDisplayProps> = ({income, taxes}) => {
             </div>
             <div className="flex justify-between mb-2">
                 <p>EI Deduction</p>
-                <p>-$500</p>
+                <p>-${convertValue(taxes.eIDeduction).toFixed(2)}</p>
             </div>
         </div>
         <div className="font-mono text-primary border-b-2">
             <div className="flex justify-between mb-2">
                 <p>Total Tax</p>
-                <p>-$16500</p>
+                <p>-${convertValue((taxes.federalTax + taxes.provincialTax + taxes.eIDeduction)).toFixed(2)}</p>
             </div>
             <div className="flex justify-between mb-2  font-semibold">
                 <p>Net Pay</p>
-                <p>$33500</p>
+                <p>${convertValue((income - (taxes.federalTax + taxes.provincialTax + taxes.eIDeduction))).toFixed(2)}</p>
             </div>
         </div>
         <div className="font-mono text-primary">
