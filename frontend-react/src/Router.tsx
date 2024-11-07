@@ -9,6 +9,7 @@ import Register from "./Register";
 import Login from "./Login";
 import IncomeTax from "./components/IncomeTax";
 import HomePage from "./components/home/home";
+import UpdateUser from "./updateUser";
 
 const Router = () => {
   const appRouter = createBrowserRouter(
@@ -19,6 +20,7 @@ const Router = () => {
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="income-tax" element={<IncomeTax />} />
+          <Route path="update" element={<UpdateUser />} />
         </Route>
       </>
     )

@@ -9,9 +9,9 @@ const cors = require("cors");
 const userController = require("./src/controllers/user-controller");
 const taxController = require("./src/controllers/tax-controller");
 
-//mongoose.connect(process.env.DATABASE_URL);
+// mongoose.connect(process.env.DATABASE_URL);
 mongoose.connect(`mongodb://localhost:27017/financialtoolkit`, {
-  authSource: 'admin'
+  authSource: "admin",
 });
 const db = mongoose.connection;
 db.on("error", (error) => console.error(error));
@@ -27,7 +27,7 @@ app.use(
   cors({
     origin: "http://localhost:3000",
     credentials: true,
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type"],
   })
 );
@@ -43,8 +43,8 @@ app.use(
     store,
     cookie: {
       maxAge: 300000000,
-      httpOnly: true,  
-      secure: false,   
+      httpOnly: true,
+      secure: false,
       sameSite: "lax",
     },
   })
@@ -67,6 +67,8 @@ app.post("/income-tax", taxController.getTax);
 app.put("/user/:id", userController.updateUser);
 
 app.delete("/user/:id", userController.deleteUser);
+
+app.get("/user/:id", userController.getUserById);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

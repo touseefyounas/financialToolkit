@@ -16,6 +16,14 @@ class UserService {
     return userRepository.findAllUsers();
   }
 
+  async getUserById(userId) {
+    const user = await userRepository.findUserById(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    return user;
+  }
+
   async loginUser(email, password) {
     const user = await userRepository.findUserByEmail(email);
     if (!user) {
