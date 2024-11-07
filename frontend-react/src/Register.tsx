@@ -48,7 +48,7 @@ const Register: React.FC = () => {
     <>
       <div>
         <div className=" w-full m-4">
-          <div className="w-2/6 mx-auto mt-20 bg-secondary rounded-3xl">
+          <div className="w-5/6 sm:w-5/6 md:w-4/6 lg:w-3/6 xl:w-2/6 mx-auto mt-20 bg-secondary rounded-3xl">
             <form className="rounded-lg text-text  m-4 py-4 px-6 ">
               <label>
                 <h1 className="pb-2 text-text text-xl font-medium">
