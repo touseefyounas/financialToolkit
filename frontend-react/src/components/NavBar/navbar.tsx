@@ -1,8 +1,47 @@
 import { Link } from "react-router-dom";
+import { useEffect } from 'react';
+import { Dispatch, SetStateAction } from "react";
 
+interface NavBarProps {
+    isAuthenticated: boolean | null;
+    setIsAuthenticated: Dispatch<SetStateAction<boolean | null>>;
+}
 
-const NavBar = () => {
+const NavBar: React.FC<NavBarProps> = ({isAuthenticated, setIsAuthenticated}) => {
 
+    const handleLogout = async () => {
+        const response = await fetch('http://localhost:8080/logout', {
+            method: 'POST',
+            headers: {
+                    'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+        })
+        if (response.ok){
+            setIsAuthenticated(false)
+            console.log('LogOut Call: ', response)
+        } 
+    }
+
+    useEffect(() => {
+        const checkAuth = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/auth", {
+            credentials: "include", 
+            });
+            if (response.ok) {
+            setIsAuthenticated(true);
+            } else {
+            setIsAuthenticated(false);
+            }
+        } catch (error) {
+            setIsAuthenticated(false);
+        }
+        };
+
+        checkAuth();
+        console.log('Authentication Status: ', isAuthenticated)
+    }, [isAuthenticated, setIsAuthenticated]);
     
     return (
         <>
@@ -11,13 +50,37 @@ const NavBar = () => {
                 <Link to='/'>
                 <h1 className="text-xl text-text mx-8">Financial ToolKit</h1>
                 </Link>
+                
                 <div className="mx-4">
+                    {
+                    isAuthenticated ? 
+                    (
+                    <>
                     <Link to='register'>
+                    <button className="text-text bg-accent mr-4 px-4 py-2 rounded-full min-w-[100px] hover:font-bold hover:bg-primary">Edit Profile</button>
+                    </Link>
+                    <Link to='login'>
+                    <button onClick={handleLogout} className="text-text bg-primary mr-4 px-4 py-2 rounded-full min-w-[100px] hover:font-bold hover:bg-accent">Logout</button>
+                    </Link>
+                    </>)
+                    :
+                     (
+                     <>
+                     <Link to='register'>
                     <button className="text-text bg-accent mr-4 px-4 py-2 rounded-full min-w-[100px] hover:font-bold hover:bg-primary">Register</button>
                     </Link>
                     <Link to='login'>
                     <button className="text-text bg-primary mr-4 px-4 py-2 rounded-full min-w-[100px] hover:font-bold hover:bg-accent">Login</button>
                     </Link>
+                    </>
+                    )
+                    }
+                    {/* <Link to='register'>
+                    <button className="text-text bg-accent mr-4 px-4 py-2 rounded-full min-w-[100px] hover:font-bold hover:bg-primary">Register</button>
+                    </Link>
+                    <Link to='login'>
+                    <button className="text-text bg-primary mr-4 px-4 py-2 rounded-full min-w-[100px] hover:font-bold hover:bg-accent">Login</button>
+                    </Link> */}
                 </div>
             </div>
         </div>
