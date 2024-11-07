@@ -1,5 +1,5 @@
 import IncomeDisplay from "./IncomeDisplay";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const IncomeTax = () => {
 
@@ -14,25 +14,52 @@ const IncomeTax = () => {
         provincialTax:0,
         eIDeduction: 0,
     })
+    const [annualIncome, setAnnualIncome ] = useState(data.income);
 
     const [cadence, setCadence ] = useState('annually');
 
-    useEffect(()=>{
-        console.log(data)
-    }, [data])
-
     const handleChange = (e: any) => {
         const { name, value } = e.target;
-  
+
+        const newValue = name === 'income' ? parseFloat(value) || 0 : value;
+
         setData((prevState)=>({
           ...prevState,
-          [name]: value
-        }))  
+          [name]: name === 'income' ? parseFloat(value) || 0 : value
+        }))
+
+        const per = name === 'per' ? value : data.per;
+        const income = name === 'income' ? newValue : data.income;
+
+        switch(per) {
+            case 'annually':
+                setAnnualIncome(income)
+                break;
+            case 'monthly':
+                setAnnualIncome(income * 12)
+                break;
+            case 'biweekly':
+                setAnnualIncome(income * 26)
+                break;
+            case 'weekly':
+                setAnnualIncome(income * 52)
+                break;
+            case 'daily':
+                setAnnualIncome(income * 260)
+                break;
+            case 'hourly':
+                setAnnualIncome(income * 2080)
+                break;
+            default:
+                throw new Error('Invalid period specified')
+        }
+        console.log('Annual Income: ', annualIncome)
+        console.log('Default Income: ', income)  
       }
       
     const handleSubmit = async (e: any) => {
         e.preventDefault()
-        console.log(data)
+        
         try {
             const response = await fetch('http://localhost:8080/income-tax', {
                 method: 'POST',
@@ -123,7 +150,7 @@ const IncomeTax = () => {
                     </div>
                 </div>
                 <div className="max-w-[640px] w-full px-10 lg:px-20 mb-4">
-                    <IncomeDisplay income={data.income} taxes={taxes} cadence={cadence}/>
+                    <IncomeDisplay income={annualIncome} taxes={taxes} cadence={cadence}/>
                 </div>
             </div>
         </div>

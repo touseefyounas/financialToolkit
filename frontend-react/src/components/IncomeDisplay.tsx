@@ -1,4 +1,4 @@
-import { useState } from 'react';
+
 
 interface IncomeDisplayProps {
     income: number;
@@ -70,7 +70,7 @@ const IncomeDisplay: React.FC<IncomeDisplayProps> = ({income, taxes, cadence}) =
         <div className="font-mono text-primary">
             <div className="flex justify-between mb-2">
                 <p>Tax Rate</p>
-                <p>33.0%</p>
+                <p>{(((income - (income - (taxes.federalTax + taxes.provincialTax + taxes.eIDeduction)))/income)*100).toFixed(1)}%</p>
             </div>
         </div>
         </>

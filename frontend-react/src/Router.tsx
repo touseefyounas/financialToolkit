@@ -7,7 +7,7 @@ import {
 import App from "./App";
 import Register from "./Register";
 import Login from "./Login";
-import IncomeTax from "./IncomeTax";
+import IncomeTax from "./components/IncomeTax";
 import HomePage from "./components/home/home";
 
 const Router = () => {

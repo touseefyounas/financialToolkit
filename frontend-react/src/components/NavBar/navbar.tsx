@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 
 const NavBar = () => {
+
+    
     return (
         <>
         <div className='w-5/6 mx-auto h-20 bg-secondary m-2 rounded-full'>
