@@ -31,9 +31,6 @@ const logoutUser = (req, res) => {
   });
 };
 
-<<<<<<< HEAD
-const auth = (req, res) => {
-=======
 const updateUser = async (req, res) => {
   const updateData = req.body;
 
@@ -56,8 +53,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const auth = (req, res, next) => {
->>>>>>> 75acd9d7063e0dce52907fd64d56b94faf1edabc
+const auth = (req, res) => {
   if (req.session.userId) {
     res.status(200)
   } else {
