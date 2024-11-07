@@ -54,12 +54,15 @@ const deleteUser = async (req, res) => {
 };
 
 const auth = (req, res) => {
+  console.log("Session:", req.session); 
   if (req.session.userId) {
-    res.status(200)
+    return res.status(200).json({ message: "Authenticated successfully." });
   } else {
-    res.status(401).json({ message: "Unauthorized: Please login." });
+    console.log("Testing the auth status");
+    return res.status(401).json({ message: "Unauthorized: Please login." });
   }
 };
+
 
 module.exports = {
   registerUser,

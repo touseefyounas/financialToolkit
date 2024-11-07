@@ -43,6 +43,9 @@ app.use(
     store,
     cookie: {
       maxAge: 300000000,
+      httpOnly: true,  
+      secure: false,   
+      sameSite: "lax",
     },
   })
 );
@@ -57,7 +60,7 @@ app.post("/register", userController.registerUser);
 
 app.post("/logout", userController.logoutUser);
 
-app.get("/home", userController.auth);
+app.get("/auth", userController.auth);
 
 app.post("/income-tax", taxController.getTax);
 
