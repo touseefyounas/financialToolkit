@@ -1,4 +1,4 @@
-
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -20,25 +20,19 @@ const Register: React.FC = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          username,
-          password,
-        }),
+      const response = await axios.post("http://localhost:8080/register", {
+        firstName,
+        lastName,
+        email,
+        username,
+        password,
       });
 
-      const data = await response.json();
-      if (response.ok) {
+      if (response.status === 201) {
+        console.log("User registered successfully:", response.data);
         navigate("/login");
       } else {
-        setError(data.message);
+        setError(response.data.message);
       }
     } catch (err) {
       setError("Error registering user. Please try again");
