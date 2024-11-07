@@ -27,8 +27,15 @@ class UserRepository {
     return User.findOne({ email });
   }
 
+  async updateUserById(id, updateData) {
+    return await User.findByIdAndUpdate(id, updateData, {
+      new: true,
+      runValidators: true,
+    });
+  }
+
   async deleteUserById(userId) {
-    return User.deleteOne({ _id: userId });
+    return User.findByIdAndDelete(userId);
   }
 }
 

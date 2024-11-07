@@ -28,8 +28,24 @@ class UserService {
     return user;
   }
 
+  async updateUser(id, updateData) {
+    const user = await userRepository.updateUserById(id, updateData);
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    return user;
+  }
+
   async deleteUser(userId) {
-    return userRepository.deleteUserById(userId);
+    const user = await userRepository.deleteUserById(userId);
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    return { message: "User deleted successfully" };
   }
 }
 
