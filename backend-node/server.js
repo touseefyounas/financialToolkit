@@ -9,7 +9,7 @@ const cors = require("cors");
 const userController = require("./src/controllers/user-controller");
 const taxController = require("./src/controllers/tax-controller");
 
-//mongoose.connect(process.env.DATABASE_URL);
+// mongoose.connect(process.env.DATABASE_URL);
 mongoose.connect(
   `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@localhost:27017/store`,
   {
@@ -63,6 +63,10 @@ app.post("/logout", userController.logoutUser);
 app.get("/home", userController.auth);
 
 app.post("/income-tax", taxController.getTax);
+
+app.put("/user/:id", userController.updateUser);
+
+app.delete("/user/:id", userController.deleteUser);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
