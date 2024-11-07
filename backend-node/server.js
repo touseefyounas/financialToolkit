@@ -10,7 +10,7 @@ const userController = require("./src/controllers/user-controller");
 const taxController = require("./src/controllers/tax-controller");
 
 //mongoose.connect(process.env.DATABASE_URL);
-mongoose.connect(`mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@localhost:27017/store`, {
+mongoose.connect(`mongodb://localhost:27017/financialtoolkit`, {
   authSource: 'admin'
 });
 const db = mongoose.connection;

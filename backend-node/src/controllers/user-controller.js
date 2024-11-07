@@ -31,9 +31,9 @@ const logoutUser = (req, res) => {
   });
 };
 
-const auth = (req, res, next) => {
+const auth = (req, res) => {
   if (req.session.userId) {
-    next();
+    res.status(200)
   } else {
     res.status(401).json({message: "Unauthorized: Please login."})
   }
