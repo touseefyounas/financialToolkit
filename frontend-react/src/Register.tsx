@@ -32,14 +32,7 @@ const Register: React.FC = () => {
 
       if (response.status === 201) {
         toast.success("User registered successfully!", {
-          position: "top-center",
           autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          transition: Bounce,
         });
 
         console.log("User registered successfully:", response.data);

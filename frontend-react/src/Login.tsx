@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
 import { Dispatch, SetStateAction } from "react";
+import { toast } from "react-toastify";
 
 const Login: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] =
@@ -38,10 +39,15 @@ const Login: React.FC = () => {
       console.log(result);
       if (result.status === 200) {
         setIsAuthenticated(true);
-        navigate("/income-tax");
+
+        toast.success("Login successful!", {
+          autoClose: 3000,
+        });
+        setTimeout(() => navigate("/income-tax"), 3000);
       }
     } catch (err) {
       setError("Error logging in user. Please try again");
+      toast.error("Error logging in user. Please try again.");
     }
   };
 
