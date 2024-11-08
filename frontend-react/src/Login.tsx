@@ -1,12 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext } from "react-router-dom";
 import { Dispatch, SetStateAction } from "react";
+import { toast } from "react-toastify";
 
 const Login: React.FC = () => {
-
-  const [isAuthenticated, setIsAuthenticated] = useOutletContext<[boolean | null, Dispatch<SetStateAction<boolean | null>>]>();
+  const [isAuthenticated, setIsAuthenticated] =
+    useOutletContext<
+      [boolean | null, Dispatch<SetStateAction<boolean | null>>]
+    >();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,16 +35,20 @@ const Login: React.FC = () => {
           withCredentials: true,
         }
       );
-    
+
       console.log(result);
       if (result.status === 200) {
-        setIsAuthenticated(true)
-        navigate("/income-tax");
+        setIsAuthenticated(true);
+
+        toast.success("Login successful!", {
+          autoClose: 3000,
+        });
+        setTimeout(() => navigate("/income-tax"), 3000);
       }
     } catch (err) {
       setError("Error logging in user. Please try again");
+      toast.error("Error logging in user. Please try again.");
     }
-    
   };
 
   return (
