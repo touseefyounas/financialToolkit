@@ -178,19 +178,19 @@ const UpdateUser: React.FC = () => {
                 <button
                   type="submit"
                   onClick={handleUpdate}
-                  className="text-text bg-accent mr-2 px-4 py-2 mt-2 text-white rounded-full hover:bg-primary"
+                  className="text-text bg-accent mr-2 px-4 py-2 mt-2 rounded-full hover:bg-primary"
                 >
                   Edit Profile
                 </button>
                 <button
                   type="button"
                   onClick={handleDelete}
-                  className="text-text bg-accent mr-2 px-4 py-2 mt-2 text-white rounded-full hover:bg-primary"
+                  className="text-text bg-accent mr-2 px-4 py-2 mt-2 rounded-full hover:bg-primary"
                 >
                   Delete Profile
                 </button>
                 <Link to="/income-tax">
-                  <button className="text-text bg-primary mr-2 px-4 py-2 mt-2 text-white rounded-full hover:bg-accent">
+                  <button className="text-text bg-primary mr-2 px-4 py-2 mt-2 rounded-full hover:bg-accent">
                     Cancel
                   </button>
                 </Link>

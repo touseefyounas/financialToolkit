@@ -6,6 +6,7 @@ interface IncomeDisplayProps {
         federalTax: number;
         provincialTax: number;
         eIDeduction: number;
+        cppDeduction: number;
     }
     cadence: string;
   }
@@ -50,7 +51,7 @@ const IncomeDisplay: React.FC<IncomeDisplayProps> = ({income, taxes, cadence}) =
             </div>
             <div className="flex justify-between mb-2">
                 <p>CPP Deduction</p>
-                <p>-$1000</p>
+                <p>-${convertValue(taxes.cppDeduction).toFixed(2)}</p>
             </div>
             <div className="flex justify-between mb-2">
                 <p>EI Deduction</p>
@@ -60,17 +61,17 @@ const IncomeDisplay: React.FC<IncomeDisplayProps> = ({income, taxes, cadence}) =
         <div className="font-mono text-primary border-b-2">
             <div className="flex justify-between mb-2">
                 <p>Total Tax</p>
-                <p>-${convertValue((taxes.federalTax + taxes.provincialTax + taxes.eIDeduction)).toFixed(2)}</p>
+                <p>-${convertValue((taxes.federalTax + taxes.provincialTax + taxes.eIDeduction + taxes.cppDeduction)).toFixed(2)}</p>
             </div>
             <div className="flex justify-between mb-2  font-semibold">
                 <p>Net Pay</p>
-                <p>${convertValue((income - (taxes.federalTax + taxes.provincialTax + taxes.eIDeduction))).toFixed(2)}</p>
+                <p>${convertValue((income - (taxes.federalTax + taxes.provincialTax + taxes.eIDeduction + taxes.cppDeduction))).toFixed(2)}</p>
             </div>
         </div>
         <div className="font-mono text-primary">
             <div className="flex justify-between mb-2">
                 <p>Tax Rate</p>
-                <p>{(((income - (income - (taxes.federalTax + taxes.provincialTax + taxes.eIDeduction)))/income)*100).toFixed(1)}%</p>
+                <p>{(((income - (income - (taxes.federalTax + taxes.provincialTax + taxes.eIDeduction + taxes.cppDeduction)))/income)*100).toFixed(1)}%</p>
             </div>
         </div>
         </>

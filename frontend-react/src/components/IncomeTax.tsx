@@ -13,6 +13,7 @@ const IncomeTax = () => {
         federalTax: 0,
         provincialTax:0,
         eIDeduction: 0,
+        cppDeduction: 0,
     })
     const [annualIncome, setAnnualIncome ] = useState(data.income);
 
