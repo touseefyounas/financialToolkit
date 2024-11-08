@@ -13,12 +13,20 @@ const HomePage: React.FC = () => {
         <p className="text-lg text-gray-600 mb-4">
           Easily calculate your taxes with our reliable tool.
         </p>
+        <div>
+          <Link to="register">
+            <button className="text-text bg-accent m-2 px-4 py-2 rounded-full min-w-[100px] hover:font-semibold hover:bg-primary">
+              Register and Start Calculating!
+            </button>
+          </Link>
 
-        <Link to="register">
-          <button className="text-text bg-accent m-2 px-4 py-2 rounded-full min-w-[100px] hover:font-bold hover:bg-primary">
-            Register and Start Calculating!
-          </button>
-        </Link>
+          <Link to="login">
+            <button className="text-text bg-primary m-2 px-4 py-2 rounded-full min-w-[100px] hover:font-semibold hover:bg-accent">
+              Already a User? Login here
+            </button>
+          </Link>
+          
+        </div>
       </div>
     </div>
   );

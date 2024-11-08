@@ -12,8 +12,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({children}): JSX.Element 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch("/auth/check", {
-          credentials: "include", 
+        const response = await fetch("http://localhost:8080/auth", {
+          credentials: "include",
         });
         if (response.ok) {
           setIsAuthenticated(true);
@@ -26,7 +26,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({children}): JSX.Element 
     };
 
     checkAuth();
-  }, []);
+    console.log("Authentication Status: ", isAuthenticated);
+  }, [isAuthenticated, setIsAuthenticated]);
 
   if (isAuthenticated === null) {
     return <div>Loading...</div>;

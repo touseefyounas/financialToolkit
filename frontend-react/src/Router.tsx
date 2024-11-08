@@ -10,6 +10,7 @@ import Login from "./Login";
 import IncomeTax from "./components/IncomeTax";
 import HomePage from "./components/home/home";
 import UpdateUser from "./updateUser";
+import ProtectedRoute from "./ProtectedRoute";
 
 const Router = () => {
   const appRouter = createBrowserRouter(
@@ -19,8 +20,20 @@ const Router = () => {
           <Route index element={<HomePage />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
-          <Route path="income-tax" element={<IncomeTax />} />
-          <Route path="update" element={<UpdateUser />} />
+          <Route path="income-tax" 
+          element={
+            <ProtectedRoute>
+            <IncomeTax />
+            </ProtectedRoute>
+            } 
+            />
+          <Route path="update" 
+          element={
+            <ProtectedRoute>
+            <UpdateUser />
+            </ProtectedRoute>
+            } 
+            />
         </Route>
       </>
     )
