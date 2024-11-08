@@ -27,7 +27,7 @@ const logoutUser = (req, res) => {
     if (err) {
       return res.status(500).send("Failed to log out");
     }
-    res.send("Logged out successfully");
+    res.status(200).send("Logged out successfully");
   });
 };
 
